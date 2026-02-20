@@ -63,6 +63,7 @@ WHERE event_datetime >= '2026-01-01'
   AND event_name IN ('begin_checkout', 'purchase')
 ```
 
+{% row %}
 {% big_value
     data="checkout_conversion"
     value="begin_checkout_users"
@@ -86,6 +87,7 @@ WHERE event_datetime >= '2026-01-01'
     fmt="pct1"
     info="purchase_users / begin_checkout_users. Measures what % of users who start checkout complete a purchase."
 /%}
+{% /row %}
 
 ---
 
