@@ -155,7 +155,7 @@ WHERE is_kyc_verified = true
     data="reg_to_verify"
     value="avg_days"
     title="Avg Days to Verification"
-    fmt="#,##0.0' days'"
+    fmt="num1"
     info="Average of dateDiff(day, registered_at, kyc_verified_at) for verified users registered after May 2025."
 /%}
 
@@ -163,7 +163,7 @@ WHERE is_kyc_verified = true
     data="reg_to_verify"
     value="median_days"
     title="Median Days to Verification"
-    fmt="#,##0.0' days'"
+    fmt="num1"
     info="Median of dateDiff(day, registered_at, kyc_verified_at). Less sensitive to outliers than the average."
 /%}
 
@@ -171,7 +171,7 @@ WHERE is_kyc_verified = true
     data="reg_to_verify"
     value="min_days"
     title="Min Days to Verification"
-    fmt="#,##0.0' days'"
+    fmt="num1"
     info="Fastest time from registration to KYC verification."
 /%}
 
@@ -179,7 +179,7 @@ WHERE is_kyc_verified = true
     data="reg_to_verify"
     value="max_days"
     title="Max Days to Verification"
-    fmt="#,##0.0' days'"
+    fmt="num1"
     info="Longest time from registration to KYC verification."
 /%}
 
@@ -209,7 +209,7 @@ WHERE is_kyc_verified = true
     data="reg_to_verify_hours"
     value="avg_hours"
     title="Avg Hours to Verification"
-    fmt="#,##0.0' hrs'"
+    fmt="num1"
     info="Average of dateDiff(hour, registered_at, kyc_verified_at) for verified users registered after May 2025."
 /%}
 
@@ -217,7 +217,7 @@ WHERE is_kyc_verified = true
     data="reg_to_verify_hours"
     value="median_hours"
     title="Median Hours to Verification"
-    fmt="#,##0.0' hrs'"
+    fmt="num1"
     info="Median of dateDiff(hour, registered_at, kyc_verified_at). Less sensitive to outliers than the average."
 /%}
 
@@ -225,7 +225,7 @@ WHERE is_kyc_verified = true
     data="reg_to_verify_hours"
     value="min_hours"
     title="Min Hours to Verification"
-    fmt="#,##0.0' hrs'"
+    fmt="num1"
     info="Fastest time from registration to KYC verification in hours."
 /%}
 
@@ -233,7 +233,7 @@ WHERE is_kyc_verified = true
     data="reg_to_verify_hours"
     value="max_hours"
     title="Max Hours to Verification"
-    fmt="#,##0.0' hrs'"
+    fmt="num1"
     info="Longest time from registration to KYC verification in hours."
 /%}
 
@@ -268,7 +268,7 @@ WHERE u.registered_at >= '2025-05-01'
     data="reg_to_invest"
     value="avg_days"
     title="Avg Days to First Investment"
-    fmt="#,##0.0' days'"
+    fmt="num1"
     info="Average of dateDiff(day, registered_at, first_purchase_date). First purchase = earliest successful order per user."
 /%}
 
@@ -276,7 +276,7 @@ WHERE u.registered_at >= '2025-05-01'
     data="reg_to_invest"
     value="median_days"
     title="Median Days to First Investment"
-    fmt="#,##0.0' days'"
+    fmt="num1"
     info="Median of dateDiff(day, registered_at, first_purchase_date). Less sensitive to outliers than the average."
 /%}
 
@@ -284,7 +284,7 @@ WHERE u.registered_at >= '2025-05-01'
     data="reg_to_invest"
     value="min_days"
     title="Min Days to First Investment"
-    fmt="#,##0.0' days'"
+    fmt="num1"
     info="Fastest time from registration to first successful purchase."
 /%}
 
@@ -292,7 +292,7 @@ WHERE u.registered_at >= '2025-05-01'
     data="reg_to_invest"
     value="max_days"
     title="Max Days to First Investment"
-    fmt="#,##0.0' days'"
+    fmt="num1"
     info="Longest time from registration to first successful purchase."
 /%}
 
@@ -330,7 +330,7 @@ WHERE u.registered_at >= '2025-05-01'
     data="reg_to_invest_hours"
     value="avg_hours"
     title="Avg Hours to First Investment"
-    fmt="#,##0.0' hrs'"
+    fmt="num1"
     info="Average of dateDiff(hour, registered_at, first_purchase_date). First purchase = earliest successful order per user."
 /%}
 
@@ -338,7 +338,7 @@ WHERE u.registered_at >= '2025-05-01'
     data="reg_to_invest_hours"
     value="median_hours"
     title="Median Hours to First Investment"
-    fmt="#,##0.0' hrs'"
+    fmt="num1"
     info="Median of dateDiff(hour, registered_at, first_purchase_date). Less sensitive to outliers than the average."
 /%}
 
@@ -346,7 +346,7 @@ WHERE u.registered_at >= '2025-05-01'
     data="reg_to_invest_hours"
     value="min_hours"
     title="Min Hours to First Investment"
-    fmt="#,##0.0' hrs'"
+    fmt="num1"
     info="Fastest time from registration to first successful purchase in hours."
 /%}
 
@@ -354,6 +354,6 @@ WHERE u.registered_at >= '2025-05-01'
     data="reg_to_invest_hours"
     value="max_hours"
     title="Max Hours to First Investment"
-    fmt="#,##0.0' hrs'"
+    fmt="num1"
     info="Longest time from registration to first successful purchase in hours."
 /%}
