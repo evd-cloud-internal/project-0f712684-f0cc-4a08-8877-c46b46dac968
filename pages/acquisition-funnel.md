@@ -191,6 +191,52 @@ WHERE is_kyc_verified = true
     info="Number of verified users included (registered after May 2025 with kyc_verified_at >= registered_at)."
 /%}
 
+### In Hours
+
+```sql reg_to_verify_hours
+SELECT
+  round(avg(dateDiff('hour', registered_at, kyc_verified_at)), 1) as avg_hours,
+  round(median(dateDiff('hour', registered_at, kyc_verified_at)), 1) as median_hours,
+  round(min(dateDiff('hour', registered_at, kyc_verified_at)), 1) as min_hours,
+  round(max(dateDiff('hour', registered_at, kyc_verified_at)), 1) as max_hours
+FROM users_enriched
+WHERE is_kyc_verified = true
+  AND registered_at >= '2025-05-01'
+  AND kyc_verified_at >= registered_at
+```
+
+{% big_value
+    data="reg_to_verify_hours"
+    value="avg_hours"
+    title="Avg Hours to Verification"
+    fmt="#,##0.0' hrs'"
+    info="Average of dateDiff(hour, registered_at, kyc_verified_at) for verified users registered after May 2025."
+/%}
+
+{% big_value
+    data="reg_to_verify_hours"
+    value="median_hours"
+    title="Median Hours to Verification"
+    fmt="#,##0.0' hrs'"
+    info="Median of dateDiff(hour, registered_at, kyc_verified_at). Less sensitive to outliers than the average."
+/%}
+
+{% big_value
+    data="reg_to_verify_hours"
+    value="min_hours"
+    title="Min Hours to Verification"
+    fmt="#,##0.0' hrs'"
+    info="Fastest time from registration to KYC verification in hours."
+/%}
+
+{% big_value
+    data="reg_to_verify_hours"
+    value="max_hours"
+    title="Max Hours to Verification"
+    fmt="#,##0.0' hrs'"
+    info="Longest time from registration to KYC verification in hours."
+/%}
+
 ---
 
 ## 5. Average Time from Registration to First Investment
@@ -256,4 +302,58 @@ WHERE u.registered_at >= '2025-05-01'
     title="Investors in Calculation"
     fmt="num0"
     info="Number of investors included (registered after May 2025 with first_purchase_date >= registered_at)."
+/%}
+
+### In Hours
+
+```sql reg_to_invest_hours
+WITH first_purchase AS (
+  SELECT
+    user_id,
+    min(`o.created_at`) as first_purchase_date
+  FROM orders_enriched
+  WHERE `o.status` = 'SUCCESS'
+  GROUP BY user_id
+)
+SELECT
+  round(avg(dateDiff('hour', u.registered_at, fp.first_purchase_date)), 1) as avg_hours,
+  round(median(dateDiff('hour', u.registered_at, fp.first_purchase_date)), 1) as median_hours,
+  round(min(dateDiff('hour', u.registered_at, fp.first_purchase_date)), 1) as min_hours,
+  round(max(dateDiff('hour', u.registered_at, fp.first_purchase_date)), 1) as max_hours
+FROM users_enriched u
+JOIN first_purchase fp ON toString(u.id) = toString(fp.user_id)
+WHERE u.registered_at >= '2025-05-01'
+  AND fp.first_purchase_date >= u.registered_at
+```
+
+{% big_value
+    data="reg_to_invest_hours"
+    value="avg_hours"
+    title="Avg Hours to First Investment"
+    fmt="#,##0.0' hrs'"
+    info="Average of dateDiff(hour, registered_at, first_purchase_date). First purchase = earliest successful order per user."
+/%}
+
+{% big_value
+    data="reg_to_invest_hours"
+    value="median_hours"
+    title="Median Hours to First Investment"
+    fmt="#,##0.0' hrs'"
+    info="Median of dateDiff(hour, registered_at, first_purchase_date). Less sensitive to outliers than the average."
+/%}
+
+{% big_value
+    data="reg_to_invest_hours"
+    value="min_hours"
+    title="Min Hours to First Investment"
+    fmt="#,##0.0' hrs'"
+    info="Fastest time from registration to first successful purchase in hours."
+/%}
+
+{% big_value
+    data="reg_to_invest_hours"
+    value="max_hours"
+    title="Max Hours to First Investment"
+    fmt="#,##0.0' hrs'"
+    info="Longest time from registration to first successful purchase in hours."
 /%}
